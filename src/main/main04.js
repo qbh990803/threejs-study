@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
-// 物体的缩放和旋转
+// 应用requestAnimationFrame
 
 // 创建场景
 const scene = new THREE.Scene();
@@ -54,14 +54,11 @@ const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
 function render(time) {
-  console.log("time", time);
   // 使用渲染器，通过相机将场景渲染进来
-  cube.position.x += 0.01;
-  cube.rotation.x += 0.01;
-  if (cube.position.x > 5) {
-    cube.position.x = 0;
-  }
-  // controls.update();
+  const t = (time / 1000) % 5;
+  cube.position.x = t * 1;
+  cube.rotation.x = t * 1;
+
   renderer.render(scene, camera);
 
   window.requestAnimationFrame(render);
