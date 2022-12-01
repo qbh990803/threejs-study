@@ -55,15 +55,42 @@ const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
 // 设置动画
-gsap.to(cube.position, {
+const animate1 = gsap.to(cube.position, {
   x: 5,
   duration: 5,
   ease: "power1.inOut",
+  // 重复次数， 无限循环-1
+  repeat: -1,
+  // 往返运动
+  yoyo: true,
+  // 延迟时间
+  delay: 2,
+  onStart: () => {
+    console.log("动画开始");
+  },
+  onComplete: () => {
+    console.log("动画完成");
+  },
 });
 gsap.to(cube.rotation, {
   x: 2 * Math.PI,
   duration: 5,
   ease: "power1.inOut",
+  // 重复次数， 无限循环-1
+  repeat: -1,
+  // 往返运动
+  yoyo: true,
+});
+
+window.addEventListener("dblclick", () => {
+  console.log("animation", animate1);
+  if (animate1.isActive()) {
+    // 暂停
+    animate1.pause();
+  } else {
+    // 恢复
+    animate1.resume();
+  }
 });
 
 function render() {
